@@ -28,17 +28,17 @@ class Home extends Component{
 
     render(){
         return(
-            <section id="post">
+            <section id='post'>
                 {this.state.posts.map((post)=>{
                     return(
                         <article key={post.key}>
                             <header>
-                                <div class="title">
+                                <div class='title'>
 									<strong>{post.titulo}</strong>
 									<span>Autor: {post.autor}</span>
 								</div>
                             </header>
-							<img src={post.imagem} alt="Capa do post"/>
+							<img src={post.imagem} alt='Capa do post'/>
 							<footer>
 								<p>{post.descricao}</p>
 							</footer>
