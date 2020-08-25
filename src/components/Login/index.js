@@ -68,7 +68,8 @@ class Login extends Component
 		return(
 			<div>
 				<form onSubmit={this.entrar} id='login'>
-					<label>Email:</label><br/>					
+					<label>Email:</label>
+					<br/>					
 					<input 
 						type 	   	 = 'email' 
 						autoComplete = 'off' 
@@ -76,18 +77,21 @@ class Login extends Component
 						value        = {this.state.email}
 						onChange     = {(e) => this.setState({email: e.target.value})}
 						placeholder  = "teste@email.com"
-					/><br/>
-					<label>Password:</label><br/>					
+					/>
+					<br/>
+					
+					<label>Password:</label>
+					<br/>					
 					<input 
 						type 		 = 'password' 
 						autoComplete = 'off' 
 						value        = {this.state.password}
 						onChange     = {(e) => this.setState({password: e.target.value})}
 						placeholder  = "******"
-					/><br/>
-
-					<button type='submit'>Entrar</button><br/>
+					/>
+					<br/>
 					
+					<button type='submit'>Entrar</button><br/>					
 					<Link to='/register'> Ainda não possui uma conta?</Link>
 				</form>
 			</div>

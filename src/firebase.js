@@ -12,34 +12,47 @@ import 'firebase/auth'
         appId: "1:628502824662:web:15e8d220caa5fe2d11ab77"
       } 
 
-class Firebase{
-    constructor(){
+class Firebase
+{
+    constructor()
+	{
         app.initializeApp(firebaseConfig)
 
-        this.app = app.database();
+        this.app = app.database()
     }
 
-    login(email, password){
+    login(email, password)
+	{
         return app.auth().signInWithEmailAndPassword(email, password)
     }
+	
+	logout()
+	{
+		return app.auth().signOut()
+	}
 
-    async register(nome, email, password){
+    async register(nome, email, password)
+	{
         await app.auth().createUserWithEmailAndPassword(email, password)
 
         const uid = app.auth().currentUser.uid;
 
-        return app.database().ref('usuarios').child(uid).set({
+        return app.database().ref('usuarios').child(uid).set(
+		{
             nome: nome
         })
     }
 
-    isInitialized(){
-        return new Promise(resolve => {
+    isInitialized()
+	{
+        return new Promise(resolve => 
+		{
             app.auth().onAuthStateChanged(resolve)
         })
     }
 	
-	getCurrent(){
+	getCurrent()
+	{
 		return app.auth().currentUser && app.auth().currentUser.email
 	}
 	

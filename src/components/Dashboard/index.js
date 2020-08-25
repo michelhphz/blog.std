@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import firebase from '../../firebase'
+import './dashboard.css'
 
 class Dashboard extends Component
 {
@@ -10,8 +11,7 @@ class Dashboard extends Component
 		super(props)
 		this.state = 
 		{
-			nome: localStorage.nome,
-			email: ''
+			nome: localStorage.nome
 		}
 		
 		this.logout = this.logout.bind(this)
@@ -22,19 +22,27 @@ class Dashboard extends Component
 		if(!firebase.getCurrent())
 		{
 			this.props.history.replace('/login')
-			return null;
+			return null
 		}
 		
 		firebase.getUserName((info)=>
-		{
+		{			
 			localStorage.nome = info.val().nome
 			this.setState({nome: localStorage.nome})
 		})
+		
 	}
 	
-	logout()
+	logout = async () =>
 	{
+		await firebase.logout()
+		.catch((error) => 
+		{
+			alert(error)
+		})
 		
+		localStorage.removeItem('nome')
+		this.props.history.push('/')
 	}
 	
 	render() 
@@ -45,7 +53,7 @@ class Dashboard extends Component
 					<h1>Olá {this.state.nome}</h1>
 					<Link to='/dashboard/new'>Novo Post</Link>
 				</div>
-				<p>{this.state.email}</p>
+				<p>{firebase.getCurrent()}</p>
 				<button onClick={()=> this.logout()}>Sair</button>
 			</div>
 		)
